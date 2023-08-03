@@ -1,0 +1,18 @@
+[Unit]
+Description=Log solar inverter values
+Requires=mysql.service
+
+[Service]
+ExecStart=/usr/bin/python3 /path/to/energy-monitor/getInverterDeye.py
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+RestartPreventExitStatus=255
+Type=simple
+Restart=always
+RestartSec=60
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
+Alias=getDeye12kHybridInverterData.service
